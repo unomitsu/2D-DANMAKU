@@ -3,6 +3,9 @@
 #include "Info.h"
 #include "Key.h"
 
+ResultScene::ResultScene(bool f) {
+	flag = f;
+}
 void ResultScene::Update() {
 	// スペースキーが押されたとき
 	if (GetKey(KEY_INPUT_SPACE)) {
@@ -17,6 +20,13 @@ void ResultScene::Update() {
 }
 
 void ResultScene::Draw() {
-	DrawFormatString(0, 50, GetColor(255, 255, 255), "スペースキーを押したらタイトル画面へ");
-	DrawFormatString(0, 100, GetColor(255, 255, 255), "ESCキーを押したらやめる");
+	if (flag) {
+		DrawFormatString(0, 100, GetColor(255, 255, 255), "クリアー");
+	}
+	else {
+		DrawFormatString(0, 100, GetColor(255, 255, 255), "死んだ");
+	}
+
+	DrawFormatString(0, 200, GetColor(255, 255, 255), "スペースキーを押したらタイトル画面へ");
+	DrawFormatString(0, 250, GetColor(255, 255, 255), "ESCキーを押したらやめる");
 }

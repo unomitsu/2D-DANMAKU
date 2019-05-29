@@ -60,7 +60,8 @@ void SceneDraw() {
 void SceneChange(int val) {
 	switch (val) {
 	case STAGE_SCENE: g_Scene = new StageScene(); break;
-	case RESULT_SCENE: g_Scene = new ResultScene(); break;
+	case RESULT_SCENE_CLEAR: g_Scene = new ResultScene(TRUE); break;
+	case RESULT_SCENE_MISS: g_Scene = new ResultScene(FALSE); break;
 	case TITLE_SCENE:
 	default: g_Scene = new TitleScene(); break;
 	}

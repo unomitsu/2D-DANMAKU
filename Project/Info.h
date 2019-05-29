@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include "Player.h"
 
-enum { TITLE_SCENE, STAGE_SCENE, RESULT_SCENE };	// シーンの状態
+enum { TITLE_SCENE, STAGE_SCENE, RESULT_SCENE_CLEAR, RESULT_SCENE_MISS };	// シーンの状態
 
 class Info {
 public:

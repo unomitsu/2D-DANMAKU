@@ -34,8 +34,11 @@ void StageScene::Update() {
 		Collision(static_cast<Objec*>(GetPlayerInstance()->shot[i]), static_cast<Objec*>(enemy));
 	}
 
-	// プレイヤーの終了判定
-	if (!GetPlayerFlag()) { SceneChange(RESULT_SCENE); }
+	//-- 終了判定
+	// エネミー終了した場合、クリア
+	if (!enemy->GetFlag()) { SceneChange(RESULT_SCENE_CLEAR); }
+	// プレイヤーが終了した場合、失敗
+	if (!GetPlayerFlag()) { SceneChange(RESULT_SCENE_MISS); }
 
 }
 
