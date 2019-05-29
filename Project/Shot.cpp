@@ -23,9 +23,8 @@ void Shot::Draw() {
 	}
 }
 
-bool Shot::CollisionResult() {
+void Shot::CollisionResult() {
 	flag = false;
-	return false;
 }
 
 void Shot::Set() {

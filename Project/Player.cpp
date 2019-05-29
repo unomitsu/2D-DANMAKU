@@ -10,19 +10,19 @@ Player::Player() {
 	size = 64;
 	image = LoadGraph("../images/player.png");
 	flag = true;
-	hp = 100;
+	hp = 20;
 }
 
 void Player::Update() {
 	// 移動の更新
 	double val = v;
-	if (GetKey(KEY_INPUT_LSHIFT)) { val /= 2; }
+	if (GetKey(KEY_INPUT_LSHIFT)) { val /= 2; }	// 左シフトを押しているとき半減速
 	if (GetKey(KEY_INPUT_UP)) { y -= val; }
 	if (GetKey(KEY_INPUT_RIGHT)) { x += val; }
 	if (GetKey(KEY_INPUT_DOWN)) { y += val; }
 	if (GetKey(KEY_INPUT_LEFT)) { x -= val; }
 	
-	// 移動範囲の制限
+	// 移動範囲の制限、範囲外に出た時は範囲内に戻す
 	if (y < 0) { y = 0; }
 	if (GetHeight() < y) { y = GetHeight(); }
 	if (GetWidth() < x) { x = GetWidth(); }
@@ -35,10 +35,6 @@ void Player::Draw() {
 	DrawCircle((int)x, (int)y, 8, GetColor(200, 100, 100), TRUE, 4);
 }
 
-bool Player::CollisionResult() {
-	hp--;
-	if (hp <= 0) {
-		return false;
-	}
-	return true;
+void Player::CollisionResult() {
+	if (--hp <= 0) { flag = false; }
 }

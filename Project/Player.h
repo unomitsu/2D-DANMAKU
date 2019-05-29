@@ -1,8 +1,4 @@
 #pragma once
-
-#ifndef DEF_PLAYER_H
-#define DEF_PLAYER_H
-
 #include "Objec.h"
 
 class Player : public Objec {
@@ -17,7 +13,5 @@ public:
 	Player();
 	void Update();
 	void Draw();
-	virtual bool CollisionResult();
+	virtual void CollisionResult();
 };
-
-#endif DEF_PLAYER_H

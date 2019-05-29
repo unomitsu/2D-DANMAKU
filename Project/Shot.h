@@ -1,8 +1,4 @@
 #pragma once
-
-#ifndef DEF_SHOT_H
-#define DEF_SHOT_H
-
 #include "Objec.h"
 
 class Shot : public Objec {
@@ -16,9 +12,7 @@ public:
 	Shot();
 	void Update();
 	void Draw();
-	virtual bool CollisionResult();
+	virtual void CollisionResult();
 
 	void Set();
 };
-
-#endif // DEF_SHOT_H

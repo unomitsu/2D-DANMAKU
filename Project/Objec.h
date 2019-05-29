@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef DEF_OBJEC_H
-#define DEF_OBJEC_H
-
 class Objec {
 protected:
 	double x, y, v;
@@ -12,14 +9,13 @@ protected:
 
 public:
 	Objec() {}
-	void Update() {}
-	void Draw() {}
-	virtual bool CollisionResult() { return false; }
+	virtual void Update() {}
+	virtual void Draw() {}
+	virtual void CollisionResult() {}
+
 
 	double GetX() { return x; }
 	double GetY() { return y; }
 	int GetSize() { return size; }
 	bool GetFlag() { return flag; }
 };
-
-#endif DEF_OBJECT_H
