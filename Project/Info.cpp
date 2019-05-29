@@ -38,7 +38,7 @@ void Collision(Objec* obj1, Objec* obj2) {
 	// あたり判定の計算、三平方の定理
 	double distanceX = obj1->GetX() - obj2->GetX();		// 2オブジェクト間のx座標の差
 	double distanceY = obj1->GetY() - obj2->GetY();		// 2オブジェクト間のy座標の差
-	double distanceR = obj1->GetSize() / 8 + obj2->GetSize() / 2;	// 2オブジェクト間の半径の和
+	double distanceR = obj1->GetHitSize() + obj2->GetHitSize();	// 2オブジェクト間の半径の和
 
 	// 2オブジェクトが衝突したとき
 	if (pow(distanceX) + pow(distanceY) < pow(distanceR)) {

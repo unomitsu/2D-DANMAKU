@@ -9,6 +9,7 @@ Shot::Shot() {
 	y = 0.0;
 	v = 1.0;
 	size = 16;
+	hit_size = size / 2;
 	flag = false;
 	image = LoadGraph("../images/shot.png");
 }
@@ -38,5 +39,13 @@ void Shot::Set(double nx, double ny) {
 	x = nx;
 	y = ny;
 	v = GetRand(50) / 10.0;
+	flag = true;
+}
+
+// 指定した座標（x, y）に弾を設置し、速度を付けて、有効にする 
+void Shot::Set(double nx, double ny, double nv) {
+	x = nx;
+	y = ny;
+	v = nv;
 	flag = true;
 }

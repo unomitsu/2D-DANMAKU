@@ -9,6 +9,7 @@ Enemy::Enemy() {
 	y = 50.0;
 	v = 4.0;
 	size = 64;
+	hit_size = size / 2;
 	flag = true;
 	hp = 100;
 	image = LoadGraph("../images/enemy.png");

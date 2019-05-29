@@ -29,6 +29,10 @@ void StageScene::Update() {
 	for (int i = 0; i < shot_max; i++) {
 		Collision(static_cast<Objec*>(GetPlayerInstance()), static_cast<Objec*>(shot[i]));
 	}
+	// プレイヤーショットとエネミー
+	for (int i = 0; i < GetPlayerInstance()->shot_max; i++) {
+		Collision(static_cast<Objec*>(GetPlayerInstance()->shot[i]), static_cast<Objec*>(enemy));
+	}
 
 	// プレイヤーの終了判定
 	if (!GetPlayerFlag()) { SceneChange(RESULT_SCENE); }
@@ -43,4 +47,5 @@ void StageScene::Draw() {
 
 	// 経過時間の描画
 	DrawFormatString(0, 50, GetColor(255, 255, 255), "Time : %d", time++);
+	DrawFormatString(0, 300, GetColor(255, 255, 255), "Time : %d", GetPlayerInstance()->shot_max);
 }

@@ -16,5 +16,6 @@ public:
 	virtual void CollisionResult();	// あたり判定後の処理
 
 	void Set(double nx, double ny);	// 指定座標にショットをセットする
+	void Set(double nx, double ny, double nv);	// 指定座標に指定した速度のショットをセットする
 };
 
