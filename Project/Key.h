@@ -1,9 +1,4 @@
 #pragma once
 
-#ifndef DEF_KEY_H
-#define DEF_KEY_H
-
-void KeyUpdate();
-bool GetKey(int key_input);
-
-#endif	// DEF_KEY_H
+void KeyUpdate();				// 全キーの状態を更新する
+bool GetKey(int key_input);		// 指定したキーの状態を取得する

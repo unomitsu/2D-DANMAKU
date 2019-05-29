@@ -16,17 +16,20 @@ Enemy::Enemy() {
 }
 
 void Enemy::Update() {
-	Movement();
+	Movement();	// 行動内容
 }
 
 void Enemy::Draw() {
+	// エネミーの画像の描画
 	DrawGraph((int)(x - size / 2), (int)(y - size / 2), image, TRUE);
+	// エネミーの体力の描画
 	DrawFormatString(GetWidth()/2, 50, GetColor(255, 255, 255), "ENEMY_HP : %d", hp);
 }
 
+// あたり判定後の処理
 void Enemy::CollisionResult() {
-	hp--;
-	flag = false;
+	// 体力を減らす  hp が 0 以下になった場合、生存フラグを落とす
+	if (--hp <= 0) { flag = false; }
 }
 
 void Enemy::Movement() {

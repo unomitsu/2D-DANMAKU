@@ -1,20 +1,21 @@
 #pragma once
 #include "Objec.h"
 
+// エネミークラス
 class Enemy : public Objec {
 private:
 	// double x, y, v;
 	// int size;
 	// bool flag;
-	int hp;
-	static int image;
-	int span;
+	static int image;	// 画像ハンドル
+	int hp;				// 体力
+	int span;			// 行動間隔
 
 public:
 	Enemy();
-	void Update();
-	void Draw();
-	virtual void CollisionResult();
+	void Update();	// 更新
+	void Draw();	// 描画
+	virtual void CollisionResult();	// あたり判定後の処理
 
-	void Movement();
+	void Movement();	// 行動内容
 };

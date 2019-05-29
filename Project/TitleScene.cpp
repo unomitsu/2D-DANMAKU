@@ -3,7 +3,7 @@
 #include "Info.h"
 
 TitleScene::TitleScene() {
-	titletextY = 0;
+	titletextY = 0;	// タイトルテキストのy座標
 }
 // 更新
 void TitleScene::Update() {

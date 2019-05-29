@@ -21,10 +21,10 @@ void SceneUpdate();			// 現在のシーンの更新
 void SceneDraw();			// 現在のシーンの描画
 void SceneChange(int val);	// シーンの変更
 
-Player* GetPlayerInstance();
-void PlayerSet();
-void PlayerUpdate();
-void PlayerDraw();
-double GetPlayerX();
-double GetPlayerY();
-bool GetPlayerFlag();
+Player* GetPlayerInstance();	// プレイヤークラスのインスタンスを取得する
+void PlayerSet();		// プレイヤーの初期化を行う
+void PlayerUpdate();	// プレイヤーの更新
+void PlayerDraw();		// プレイヤーの描画
+double GetPlayerX();	// プレイヤーのx座標を取得する
+double GetPlayerY();	// プレイヤーのy座標を取得する
+bool GetPlayerFlag();	// プレイヤーの生存フラグを取得する

@@ -1,12 +1,9 @@
 #pragma once
 
-#ifndef DEF_SCENE_H
-#define DEF_SCENE_H
-
+// シーンクラス 各シーンクラスの親クラス
 class Scene {
 public:
 	virtual void Update() {}
 	virtual void Draw() {}
 };
 
-#endif // !DEF_SCENE_H

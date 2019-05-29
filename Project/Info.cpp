@@ -7,10 +7,11 @@
 #include "ResultScene.h"
 #include "Player.h"
 
-Info* g_Info = new Info();
-Scene* g_Scene = new TitleScene();
-Player* g_Player = new Player();
+Info* g_Info = new Info();			// データ保持
+Scene* g_Scene = new TitleScene();	// シーン管理
+Player* g_Player = new Player();	// プレイヤー
 
+// 各データの初期化
 void Info_Initialize() {
 	GetScreenState(&g_Info->width, &g_Info->height, NULL);
 }
@@ -65,24 +66,31 @@ void SceneChange(int val) {
 	}
 }
 
+// プレイヤーのインスタンスを返す
 Player* GetPlayerInstance() {
 	return g_Player;
 }
+// プレイヤーの初期化を行う
 void PlayerSet() {
 	g_Player = new Player();
 }
+// プレイヤーの更新
 void PlayerUpdate() {
 	g_Player->Update();
 }
+// プレイヤーの描画
 void PlayerDraw() {
 	g_Player->Draw();
 }
+// プレイヤーの x座標を返す
 double GetPlayerX() {
 	return g_Player->GetX();
 }
+// プレイヤーの y座標を返す
 double GetPlayerY() {
 	return g_Player->GetY();
 }
+// プレイヤーの生存フラグを返す
 bool GetPlayerFlag() {
 	return g_Player->GetFlag();
 }

@@ -5,7 +5,7 @@
 // タイトルシーンクラス
 class TitleScene : public Scene {
 private:
-	int titletextY;
+	int titletextY;	// タイトルのテキストのY座標
 
 public:
 	TitleScene();

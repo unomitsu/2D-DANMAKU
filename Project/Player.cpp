@@ -31,12 +31,14 @@ void Player::Update() {
 	if (x < 0) { x = 0; }
 }
 
+// 描画
 void Player::Draw() {
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "HP : %d", hp);
-	DrawGraph((int)(x - size / 2), (int)(y - size / 2), image, TRUE);
-	DrawCircle((int)x, (int)y, 8, GetColor(200, 100, 100), TRUE, 4);
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "HP : %d", hp);		// 体力
+	DrawGraph((int)(x - size / 2), (int)(y - size / 2), image, TRUE);	// プレイヤーの画像
+	DrawCircle((int)x, (int)y, 8, GetColor(200, 100, 100), TRUE, 4);	// あたり判定の大きさ
 }
 
 void Player::CollisionResult() {
+	// 体力を減らす  hp が 0 以下になった場合、生存フラグを落とす
 	if (--hp <= 0) { flag = false; }
 }
