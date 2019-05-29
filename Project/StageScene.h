@@ -1,20 +1,19 @@
 #pragma once
 
-#ifndef DEF_STAGESCENE_H
-#define DEF_STAGESCENE_H
-
 #include "Scene.h"
 #include "Player.h"
 #include "Shot.h"
+#include "Enemy.h"
 
 class StageScene : public Scene {
 private:
-	// -- 宣言と初期化
-	Player *player;
+	// エネミー関連
+	Enemy *enemy;
 	static const int shot_max = 200;
 	int shot_num = 0;
 	Shot *shot[shot_max];
-	int time;
+
+	int time;	// 経過時間
 
 public:
 	StageScene();
@@ -22,4 +21,3 @@ public:
 	void Draw();
 };
 
-#endif // !DEF_STAGESCENE_H

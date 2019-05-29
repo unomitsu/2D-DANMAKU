@@ -1,19 +1,20 @@
 #pragma once
 #include "Objec.h"
 
-class Shot : public Objec {
+class Enemy : public Objec {
 private:
 	// double x, y, v;
 	// int size;
 	// bool flag;
+	int hp;
 	static int image;
+	int span;
 
 public:
-	Shot();
+	Enemy();
 	void Update();
 	void Draw();
 	virtual void CollisionResult();
 
-	void Set(double nx, double ny);
+	void Movement();
 };
-

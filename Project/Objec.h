@@ -4,7 +4,7 @@ class Objec {
 protected:
 	double x, y, v;
 	int size;
-	int image;
+	//static int image;
 	bool flag;
 
 public:
@@ -19,3 +19,4 @@ public:
 	int GetSize() { return size; }
 	bool GetFlag() { return flag; }
 };
+

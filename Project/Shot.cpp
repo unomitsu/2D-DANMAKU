@@ -2,13 +2,15 @@
 #include "Shot.h"
 #include "Info.h"
 
+int Shot::image;
+
 Shot::Shot() {
 	x = 100.0;
 	y = 0.0;
 	v = 1.0;
 	size = 16;
-	image = LoadGraph("../images/shot.png");
 	flag = false;
+	image = LoadGraph("../images/shot.png");
 }
 
 void Shot::Update() {
@@ -27,9 +29,9 @@ void Shot::CollisionResult() {
 	flag = false;
 }
 
-void Shot::Set() {
-	x = GetWidth() * GetRand(100)/100.0;
-	y = 0;
+void Shot::Set(double nx, double ny) {
+	x = nx;
+	y = ny;
 	v = GetRand(50) / 10.0;
 	flag = true;
 }

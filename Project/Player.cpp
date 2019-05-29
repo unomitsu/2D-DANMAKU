@@ -3,14 +3,16 @@
 #include "Key.h"
 #include "Info.h"
 
+int Player::image;
+
 Player::Player() {
 	x = 100.0;
 	y = 100.0;
 	v = 4;
 	size = 64;
-	image = LoadGraph("../images/player.png");
 	flag = true;
 	hp = 20;
+	image = LoadGraph("../images/player.png");
 }
 
 void Player::Update() {

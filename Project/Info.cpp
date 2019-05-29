@@ -5,22 +5,23 @@
 #include "TitleScene.h"
 #include "StageScene.h"
 #include "ResultScene.h"
+#include "Player.h"
 
-// ウィンドウの横幅と縦幅
-int g_Width, g_Height;
+Info* g_Info = new Info();
+Scene* g_Scene = new TitleScene();
+Player* g_Player = new Player();
 
-// ウィンドウの横幅と縦幅（とColorBitDepth）を取得
-void info_initialize() {
-	GetScreenState(&g_Width, &g_Height, NULL);
+void Info_Initialize() {
+	GetScreenState(&g_Info->width, &g_Info->height, NULL);
 }
 
 // ウィンドウの横幅を返す
 int GetWidth() {
-	return g_Width;
+	return g_Info->width;
 }
 // ウィンドウの縦幅を返す
 int GetHeight() {
-	return g_Height;
+	return g_Info->height;
 }
 
 // 2乗を返す
@@ -46,23 +47,42 @@ void Collision(Objec* obj1, Objec* obj2) {
 	}
 }
 
-// シーン管理
-Scene* scene = new TitleScene();
-
 // 現在のシーンの更新
 void SceneUpdate() {
-	scene->Update();
+	g_Scene->Update();
 }
 // 現在のシーンの描画
 void SceneDraw() {
-	scene->Draw();
+	g_Scene->Draw();
 }
 // シーンの変更
 void SceneChange(int val) {
 	switch (val) {
-	case STAGE_SCENE: scene = new StageScene(); break;
-	case RESULT_SCENE: scene = new ResultScene(); break;
+	case STAGE_SCENE: g_Scene = new StageScene(); break;
+	case RESULT_SCENE: g_Scene = new ResultScene(); break;
 	case TITLE_SCENE:
-	default: scene = new TitleScene(); break;
+	default: g_Scene = new TitleScene(); break;
 	}
+}
+
+Player* GetPlayerInstance() {
+	return g_Player;
+}
+void PlayerSet() {
+	g_Player = new Player();
+}
+void PlayerUpdate() {
+	g_Player->Update();
+}
+void PlayerDraw() {
+	g_Player->Draw();
+}
+double GetPlayerX() {
+	return g_Player->GetX();
+}
+double GetPlayerY() {
+	return g_Player->GetY();
+}
+bool GetPlayerFlag() {
+	return g_Player->GetFlag();
 }

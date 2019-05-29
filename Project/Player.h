@@ -5,9 +5,9 @@ class Player : public Objec {
 private:
 	// double x, y;
 	// int size;
-	// int image;
 	// bool flag;
 	int hp;
+	static int image;
 
 public:
 	Player();
