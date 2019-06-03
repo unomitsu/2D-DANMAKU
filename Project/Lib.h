@@ -19,3 +19,5 @@ void SetEnemyXV(double nxv);	// エネミーのx方向の速度を設定する
 void SetEnemyYV(double nyv);	// エネミーのy方向の速度を設定する
 
 void SetShot(double nx, double ny, double nxv, double nyv);	// 指定座標(nx, ny)に速度 (nxv, nyv) のショットを設置する
+
+void Loop(double time);

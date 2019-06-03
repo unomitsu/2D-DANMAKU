@@ -1,5 +1,6 @@
 #include "Info.h"
 #include "Player.h"
+#include <thread>
 
 // ウィンドウの横幅を返す
 int GetWidth() {
@@ -56,7 +57,7 @@ double GetEnemyHPRate() {
 	if (enemy_hp_now <= 0) { return 0.0; }
 
 	// 0 以下でない場合は、計算した結果を返す
-	return (double) enemy_hp_now/ enemy_hp_max;
+	return (double)enemy_hp_now / enemy_hp_max;
 }
 
 // エネミーのx方向の速度を設定する
@@ -70,14 +71,10 @@ void SetEnemyYV(double nyv) {
 
 // 指定座標(x, y)に速度 v のショットを設置する
 void SetShot(double nx, double ny, double nxv, double nyv) {
-	// 仮ショットの作成
-	Shot* shot = new Shot();
-	shot->x = nx;
-	shot->y = ny;
-	shot->xv = nxv;
-	shot->yv = nyv;
-	shot->Fire();
-
 	// vector配列へ末尾追加
-	ShotAdd(*shot);
+	ShotAdd(nx, ny, nxv, nyv);
+}
+
+void Loop(double time) {
+	std::this_thread::sleep_for(std::chrono::milliseconds((int)(time * 1000)));
 }

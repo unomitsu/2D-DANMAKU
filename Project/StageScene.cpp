@@ -3,54 +3,46 @@
 #include "Info.h"
 #include "Lib.h"
 
-void numnumnum() {
-	int time = GetStageTime();	// 基準時間
+void ThStage() {
+	int time = 0;	// 基準時間
 
-	/*
 	// 体力が 半分以上あるとき
-	while (GetEnemyHPRate() >= 0.5) {
-		int t = GetStageTime() - time;
-
-		// ショットの設定、10フレームごとに
-		if (t % 10 == 0) {
-			SetShot(GetWidth() * GetRand(100) / 100.0, 0.0, 0, 8);
+	while (GetPlayerFlag() && GetEnemyHPRate() >= 0.5) {
+		// ショットの設定
+		for (int i = 0; i < 10; i++) {
+			SetShot(GetWidth() * GetRand(100) / 100.0, 0.0, 0, 1.0 + GetRand(40) / 10.0);
 		}
-		// エネミーの動作、100フレーム経過するごとに
-		if (t == 100) {
+		// エネミーの動作、1s 経過するごとに
+		if (time % 2 == 0) {
 			//　プレイヤーより左にいるとき右に動く(xは増加)
 			if (GetEnemyX() < GetPlayerX()) {
-				if (GetEnemyXV() > 0) {
-					SetEnemyXV(GetEnemyXV());
-				}
-				else {
-					SetEnemyXV(-GetEnemyXV());
-				}
+				SetEnemyXV(4.0);
 			}
 			//　プレイヤーより右にいるとき左に動く(xは減少)
 			else {
-				if (GetEnemyXV() > 0) {
-					SetEnemyXV(-GetEnemyXV());
-				}
-				else {
-					SetEnemyXV(GetEnemyXV());
-				}
+				SetEnemyXV(-4.0);
 			}
-			// 基準時間の更新
-			time = GetStageTime();
 		}
-	}
+		Loop(0.4);
+		SetEnemyXV(0.0);
 
+		// 待ち時間 10s
+		Loop(0.6);
+	}
+	
+	time = 0;	// 基準時間
+	
 	// 体力が半分以下になった時
-	while (GetEnemyFlag()) {
-		// 30フレーム経過するごとに
-		if (GetStageTime() - time == 100) {
-
-
-			// 基準時間の更新
-			time = GetStageTime();
+	while (GetPlayerFlag() && GetEnemyFlag()) {
+		// 弾発射
+		for (int i = 0; i < 10; i++) {
+			double nxv = GetRand(40) / 10.0 - 2.0;
+			double nyv = GetRand(40) / 10.0 - 2.0;
+			SetShot(GetEnemyX(), GetEnemyY(), nxv, nyv);
 		}
+		Loop(1.0);
 	}
-	*/
+
 }
 
 StageScene::StageScene() {
@@ -59,8 +51,8 @@ StageScene::StageScene() {
 	EnemySet();			// エネミーの初期化
 
 	// スレッドの開始
-	std::thread ttth(numnumnum);
-	th = std::move(ttth);
+	std::thread th_st(ThStage);
+	th_stage = std::move(th_st);
 }
 
 void StageScene::Update() {
@@ -78,16 +70,15 @@ void StageScene::Update() {
 	for (int i = 0; i < GetPlayerInstance()->shot_max; i++) {
 		Collision(static_cast<Objec*>(GetPlayerInstance()->shot[i]), static_cast<Objec*>(GetEnemyInstance()));
 	}
-
 	//-- 終了判定
 	// エネミー終了した場合、クリア
 	if (!GetEnemyFlag()) {
-		th.join();			// スレッド終了まで待つ
+		th_stage.join();			// スレッド終了まで待つ
 		SceneChange(RESULT_SCENE_CLEAR);
 	}
 	// プレイヤーが終了した場合、失敗
 	if (!GetPlayerFlag()) {
-		th.join();			// スレッド終了まで待つ
+		th_stage.join();			// スレッド終了まで待つ
 		SceneChange(RESULT_SCENE_MISS);
 	}
 }

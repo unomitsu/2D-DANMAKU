@@ -12,6 +12,7 @@ class Info {
 public:
 	int width, height;		// ウィンドウの横幅と縦幅
 	int stage_time;			// ステージシーンに変わってからの経過時間
+	bool stage_flag;		// スレッド管理用のフラグ
 
 	void Initialize();
 	void Update();
@@ -20,6 +21,8 @@ public:
 Info* GetInfoInstance();		// Infoクラスのインスタンスを返す
 void Info_Initialize();			// 各データの初期化
 void Info_Update();				// 各データの更新
+void StageFlagOff();			// スレッド処理管理用フラグを落とす
+bool GetStageFlag();			// スレッド処理管理用フラグを取得する
 
 void Collision(Objec* obj1, Objec* obj2);	// あたり判定
 
@@ -40,7 +43,7 @@ void EnemyDraw();				// エネミーの描画
 Shot* GetShotInstance(int id);	// ショット配列のvectorインスタンスを取得する
 void ShotUpdate();				// ショットの更新
 void ShotDraw();				// ショットの描画
-void ShotAdd(Shot shot);		// ショットの追加
+void ShotAdd(double nx, double ny, double nxv, double nyv);		// ショットの追加
 int GetShotNum();				// ショットの数を返す
 
 void AddNumNum();

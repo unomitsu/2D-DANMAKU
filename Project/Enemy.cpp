@@ -8,7 +8,8 @@ int Enemy::image;
 Enemy::Enemy() {
 	x = GetWidth() / 2;		// x座標の初期化
 	y = 50.0;				// y座標の初期化
-	xv = yv = 0.0;			// x方向、y方向の初期化
+	xv = 2.0;
+	yv = 0.0;			// x方向、y方向の初期化
 	flag = true;			// 生存フラグを立てる
 	hp_max = hp_now = 100;	// 現在の体力、最大体力の設定
 

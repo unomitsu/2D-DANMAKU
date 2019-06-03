@@ -3,13 +3,21 @@
 #include "Info.h"
 #include "Lib.h"
 
-int Shot::image;
+int Shot::image = -1;
 
 Shot::Shot() {
 	x = y = 100.0;		// 座標の初期化
 	xv = yv = 0.0;		// 速度の初期化
 	flag = false;		// 有効フラグを落とす
 	SetImage();			// 画像関連の初期化
+}
+Shot::Shot(double nx, double ny, double nxv, double nyv) {
+	x = nx;
+	y = ny;
+	xv = nxv;
+	yv = nyv;
+	flag = true;
+	SetImage();
 }
 
 void Shot::Update() {
@@ -37,7 +45,9 @@ void Shot::CollisionResult() {
 void Shot::SetImage() {
 	size = 16;
 	hit_size = size / 2;
-	image = LoadGraph("../images/shot.png");
+	if (image == -1) {
+		image = LoadGraph("../images/shot.png");
+	}
 }
 
 // フラグを立てて発射する

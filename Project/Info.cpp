@@ -20,10 +20,12 @@ std::vector<Shot> g_Shot(0);			// ショット配列
 void Info::Initialize() {
 	GetScreenState(&width, &height, NULL);
 	stage_time = 0;
+	stage_flag = true;
 }
 // Infoクラスの更新
 void Info::Update() {
 	stage_time++;	// 経過時間の加算
+	stage_flag = true;	// スレッド処理許可
 }
 
 // Infoクラスのインスタンスを返す
@@ -37,6 +39,14 @@ void Info_Initialize() {
 // 各データの更新
 void Info_Update() {
 	g_Info->Update();
+}
+// スレッド処理管理用フラグを落とす
+void StageFlagOff() {
+	g_Info->stage_flag = false;
+}
+// スレッド処理管理用フラグを取得する
+bool GetStageFlag() {
+	return g_Info->stage_flag;
 }
 
 // 2乗を返す
@@ -122,13 +132,13 @@ Shot* GetShotInstance(int id) {
 }
 // ショットの更新
 void ShotUpdate() {
-	for (auto i = g_Shot.begin(); i != g_Shot.end(); ++i) {
-		i->Update();	// 更新
+	for (int i = 0; i < g_Shot.size(); i++) {
+		g_Shot.at(i).Update();	// 更新
 
 		// 有効でなくなった、もしくは範囲外に出た場合、このデータを削除する
 		// 削除すると、全データが前にずらされるため、インクリメントを実行しない
-		if (! i->GetFlag() || i->InWindow()) {
-			g_Shot.erase(i);
+		if (!g_Shot.at(i).GetFlag() || !g_Shot.at(i).InWindow()) {
+			g_Shot.erase(g_Shot.begin() + i);
 			continue;
 		}
 	}
@@ -140,8 +150,8 @@ void ShotDraw() {
 	}
 }
 // ショットの追加
-void ShotAdd(Shot shot) {
-	g_Shot.push_back(shot);
+void ShotAdd(double nx, double ny, double nxv, double nyv) {
+	g_Shot.emplace_back(nx, ny, nxv, nyv);
 }
 // ショットの追加
 int GetShotNum() {

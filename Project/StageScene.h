@@ -10,7 +10,7 @@
 // ステージシーンクラス
 class StageScene : public Scene {
 private:
-	std::thread th;
+	std::thread th_stage;
 
 public:
 	StageScene();
