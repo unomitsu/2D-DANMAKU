@@ -152,6 +152,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Lib.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResultScene.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Info.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="Lib.h" />
     <ClInclude Include="Objec.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResultScene.h" />

@@ -4,6 +4,9 @@
 
 TitleScene::TitleScene() {
 	titletextY = 0;	// タイトルテキストのy座標
+
+	// 背景を灰色にします
+	SetBackgroundColor(100, 100, 100);
 }
 // 更新
 void TitleScene::Update() {

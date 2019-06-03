@@ -5,6 +5,15 @@
 
 ResultScene::ResultScene(bool f) {
 	flag = f;
+
+	// クリア時は背景が白色
+	if (f) {
+		SetBackgroundColor(200, 200, 200);
+	}
+	// 未クリア時は背景が赤色
+	else {
+		SetBackgroundColor(255, 100, 100);
+	}
 }
 void ResultScene::Update() {
 	// スペースキーが押されたとき

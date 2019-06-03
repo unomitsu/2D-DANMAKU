@@ -3,14 +3,14 @@
 // オブジェクトクラス player, enemy, shot
 class Objec {
 protected:
-	double x, y, v;	// x座標、y座標、移動速度
 	int size;		// 画像サイズ
 	int hit_size;	// あたり判定の大きさ
 	bool flag;		// 生存フラグ
 	//static int image;
 
 public:
-	Objec() {}
+	double x, y;	// x座標、y座標
+
 	virtual void Update() {}	// 更新
 	virtual void Draw() {}		// 描画
 	virtual void CollisionResult() {}	// あたり判定後の処理

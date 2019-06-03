@@ -1,23 +1,22 @@
 #include "DxLib.h"
 #include "Shot.h"
 #include "Info.h"
+#include "Lib.h"
 
 int Shot::image;
 
 Shot::Shot() {
-	x = 100.0;
-	y = 0.0;
-	v = 1.0;
-	size = 16;
-	hit_size = size / 2;
-	flag = false;
-	image = LoadGraph("../images/shot.png");
+	x = y = 100.0;		// 座標の初期化
+	xv = yv = 0.0;		// 速度の初期化
+	flag = false;		// 有効フラグを落とす
+	SetImage();			// 画像関連の初期化
 }
 
 void Shot::Update() {
 	// 弾が有効な時のみ更新
 	if (flag) {
-		y += v;
+		x += xv;
+		y += yv;
 	}
 }
 
@@ -34,18 +33,22 @@ void Shot::CollisionResult() {
 	flag = false;
 }
 
-// 指定した座標（x, y）に弾を設置し、速度を付けて、有効にする 
-void Shot::Set(double nx, double ny) {
-	x = nx;
-	y = ny;
-	v = GetRand(50) / 10.0;
+// 画像関連の初期化
+void Shot::SetImage() {
+	size = 16;
+	hit_size = size / 2;
+	image = LoadGraph("../images/shot.png");
+}
+
+// フラグを立てて発射する
+void Shot::Fire() {
 	flag = true;
 }
 
-// 指定した座標（x, y）に弾を設置し、速度を付けて、有効にする 
-void Shot::Set(double nx, double ny, double nv) {
-	x = nx;
-	y = ny;
-	v = nv;
-	flag = true;
+// 画面範囲内に存在するかどうかを返す。存在する=TRUE、存在しない=FALSE
+bool Shot::InWindow() {
+	if (x < 0 || GetWidth() < x || y < 0 || GetHeight() < y) {
+		return false;
+	}
+	return true;
 }

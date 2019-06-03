@@ -14,9 +14,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// アニメーションのちらつきを消すために、描画先を裏画面にする
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	// 背景を灰色にします
-	SetBackgroundColor(100, 100, 100);
-
 	// ProcessMessage()		Windowsアプリのプログラムの、メッセージ(イベント)処理をしてくれる。成功で0、失敗で-1。
 	// ScreenFlip()			裏画面の内容を表画面に反映する。成功で0、エラーで-1。
 	// ClearDrawScreen()	描画先の画面に書かれたものを消去する。成功で0、エラーで-1。

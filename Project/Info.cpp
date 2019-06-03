@@ -6,23 +6,37 @@
 #include "StageScene.h"
 #include "ResultScene.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Shot.h"
+#include <vector>
 
 Info* g_Info = new Info();			// データ保持
 Scene* g_Scene = new TitleScene();	// シーン管理
 Player* g_Player = new Player();	// プレイヤー
+Enemy* g_Enemy = new Enemy();		// エネミー
+std::vector<Shot> g_Shot(0);			// ショット配列
 
+// Infoクラスの初期化
+void Info::Initialize() {
+	GetScreenState(&width, &height, NULL);
+	stage_time = 0;
+}
+// Infoクラスの更新
+void Info::Update() {
+	stage_time++;	// 経過時間の加算
+}
+
+// Infoクラスのインスタンスを返す
+Info* GetInfoInstance() {
+	return g_Info;
+}
 // 各データの初期化
 void Info_Initialize() {
-	GetScreenState(&g_Info->width, &g_Info->height, NULL);
+	g_Info->Initialize();
 }
-
-// ウィンドウの横幅を返す
-int GetWidth() {
-	return g_Info->width;
-}
-// ウィンドウの縦幅を返す
-int GetHeight() {
-	return g_Info->height;
+// 各データの更新
+void Info_Update() {
+	g_Info->Update();
 }
 
 // 2乗を返す
@@ -83,15 +97,61 @@ void PlayerUpdate() {
 void PlayerDraw() {
 	g_Player->Draw();
 }
-// プレイヤーの x座標を返す
-double GetPlayerX() {
-	return g_Player->GetX();
+
+// エネミークラスのインスタンスを取得する
+Enemy* GetEnemyInstance() {
+	return g_Enemy;
 }
-// プレイヤーの y座標を返す
-double GetPlayerY() {
-	return g_Player->GetY();
+// エネミーの初期化を行う
+void EnemySet() {
+	g_Enemy = new Enemy();
 }
-// プレイヤーの生存フラグを返す
-bool GetPlayerFlag() {
-	return g_Player->GetFlag();
+
+// エネミーの更新
+void EnemyUpdate() {
+	g_Enemy->Update();
+}
+// エネミーの描画
+void EnemyDraw() {
+	g_Enemy->Draw();
+}
+
+// ショット配列のvectorインスタンスを取得する
+Shot* GetShotInstance(int id) {
+	return &g_Shot.at(id);
+}
+// ショットの更新
+void ShotUpdate() {
+	for (auto i = g_Shot.begin(); i != g_Shot.end(); ++i) {
+		i->Update();	// 更新
+
+		// 有効でなくなった、もしくは範囲外に出た場合、このデータを削除する
+		// 削除すると、全データが前にずらされるため、インクリメントを実行しない
+		if (! i->GetFlag() || i->InWindow()) {
+			g_Shot.erase(i);
+			continue;
+		}
+	}
+}
+// ショットの描画
+void ShotDraw() {
+	for (auto i = g_Shot.begin(); i != g_Shot.end(); ++i) {
+		i->Draw();
+	}
+}
+// ショットの追加
+void ShotAdd(Shot shot) {
+	g_Shot.push_back(shot);
+}
+// ショットの追加
+int GetShotNum() {
+	return static_cast<int>(g_Shot.size());
+}
+
+int g_NumNum = 0;
+void AddNumNum() {
+	g_NumNum++;
+}
+int GetNumNum() {
+	return g_NumNum;
 }
